@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
 	//初始化socket和地址结构体
 	dhcp_setup();
 
-	if(argc == 3) { //三个参数时
+	if (argc == 3) { //三个参数时
 		if (!strcmp(argv[2], "--interact")) {
 			interact();
 		} else if (!strcmp(argv[2], "--default")) {
@@ -133,13 +133,13 @@ int main(int argc, char **argv) {
 
 void usage(char **argv) {
 	printf("Usage: %s <interface> <option>\n"
-			       "Options:\n"
-			       "--interact\n"
-			       "--default\n"
-			       "--release <Server IP>\n"
-			       "--inform <Server IP>\n"
-			       "--renew <Server IP>\n"
-			       "--rebind <Server IP>\n", argv[0]);
+	       "Options:\n"
+	       "--interact\n"
+	       "--default\n"
+	       "--release <Server IP>\n"
+	       "--inform <Server IP>\n"
+	       "--renew <Server IP>\n"
+	       "--rebind <Server IP>\n", argv[0]);
 }
 
 //交互菜单
@@ -291,7 +291,7 @@ void dhcp_setup() {
 	//设置socket广播
 	printf("Setting the socket broadcast...\n");
 	int flag = 1;
-	if (setsockopt(dhcp_socket, SOL_SOCKET, SO_BROADCAST | SO_REUSEADDR, &flag, sizeof(flag)) < 0) {
+	if (setsockopt(dhcp_socket, SOL_SOCKET, SO_BROADCAST | SO_REUSEADDR, &flag, sizeof(flag)) < 0) { // NOLINT
 		printf("Set the socket broadcast failed!\n");
 		dhcp_close();
 		exit(1);
@@ -340,7 +340,7 @@ int dhcp_discover(struct dhcp_t *dhcp_ack) {
 	struct dhcp_t dhcp_discover, dhcp_offer, dhcp_request;
 	uint8_t *option_value;
 	srand((unsigned int) time(NULL)); //随机数播种
-	xid = (uint32_t) rand();
+	xid = (uint32_t) rand(); // NOLINT
 
 	//discover(+request)包 0.0.0.0 -> 255.255.255.255
 	change_socket_setup(INADDR_ANY, INADDR_BROADCAST);
@@ -365,8 +365,8 @@ int dhcp_discover(struct dhcp_t *dhcp_ack) {
 			memcpy(&dhcp_server_identifier, option_value, sizeof(struct in_addr));
 			yiaddr = dhcp_offer.yiaddr; //获取服务器提供的地址 //网络字节序的
 			int addr = ntohl(dhcp_server_identifier);
-			printf("Received a dhcp offer packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, (addr >> 16) & 0xFF,
-			       (addr >> 8) & 0xFF, (addr) & 0xFF);
+			printf("Received a dhcp offer packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, // NOLINT
+			       (addr >> 16) & 0xFF, (addr >> 8) & 0xFF, (addr) & 0xFF); // NOLINT
 			break;
 		}
 	}
@@ -393,8 +393,8 @@ int dhcp_discover(struct dhcp_t *dhcp_ack) {
 			get_dhcp_option(dhcp_ack, OPTION_DHCP_SERVER_IDENTIFIER, &option_value);
 			memcpy(&dhcp_server_identifier, option_value, sizeof(struct in_addr));
 			int addr = ntohl(dhcp_server_identifier);
-			printf("Received a dhcp ack packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, (addr >> 16) & 0xFF,
-			       (addr >> 8) & 0xFF, (addr) & 0xFF);
+			printf("Received a dhcp ack packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, (addr >> 16) & 0xFF, // NOLINT
+			       (addr >> 8) & 0xFF, (addr) & 0xFF); // NOLINT
 			break;
 		}
 
@@ -407,7 +407,7 @@ int dhcp_discover(struct dhcp_t *dhcp_ack) {
 void dhcp_release() {
 	struct dhcp_t dhcp_release;
 	srand((unsigned int) time(NULL)); //随机数播种
-	xid = (uint32_t) rand();
+	xid = (uint32_t) rand(); // NOLINT
 
 	//release包 x.x.x.x -> server_ip_address
 	change_socket_setup(ntohl(get_ip_address()), ntohl(dhcp_server_identifier));
@@ -424,7 +424,7 @@ int dhcp_inform(struct dhcp_t *dhcp_ack) {
 	struct dhcp_t dhcp_inform;
 	uint8_t *option_value;
 	srand((unsigned int) time(NULL)); //随机数播种
-	xid = (uint32_t) rand();
+	xid = (uint32_t) rand(); // NOLINT
 
 	//inform包 x.x.x.x -> 255.255.255.255
 	change_socket_setup(ntohl(get_ip_address()), INADDR_BROADCAST);
@@ -451,8 +451,8 @@ int dhcp_inform(struct dhcp_t *dhcp_ack) {
 			get_dhcp_option(dhcp_ack, OPTION_DHCP_SERVER_IDENTIFIER, &option_value);
 			memcpy(&dhcp_server_identifier, option_value, sizeof(struct in_addr));
 			int addr = ntohl(dhcp_server_identifier);
-			printf("Received a dhcp ack packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, (addr >> 16) & 0xFF,
-			       (addr >> 8) & 0xFF, (addr) & 0xFF);
+			printf("Received a dhcp ack packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, (addr >> 16) & 0xFF, // NOLINT
+			       (addr >> 8) & 0xFF, (addr) & 0xFF); // NOLINT
 			break;
 		}
 	}
@@ -465,7 +465,7 @@ int dhcp_renew(struct dhcp_t *dhcp_ack) {
 	struct dhcp_t dhcp_renew;
 	uint8_t *option_value;
 	srand((unsigned int) time(NULL)); //随机数播种
-	xid = (uint32_t) rand();
+	xid = (uint32_t) rand(); // NOLINT
 
 	//renew包 x.x.x.x -> server_ip_address
 	change_socket_setup(ntohl(get_ip_address()), ntohl(dhcp_server_identifier));
@@ -492,8 +492,8 @@ int dhcp_renew(struct dhcp_t *dhcp_ack) {
 			get_dhcp_option(dhcp_ack, OPTION_DHCP_SERVER_IDENTIFIER, &option_value);
 			memcpy(&dhcp_server_identifier, option_value, sizeof(struct in_addr));
 			int addr = ntohl(dhcp_server_identifier);
-			printf("Received a dhcp ack packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, (addr >> 16) & 0xFF,
-			       (addr >> 8) & 0xFF, (addr) & 0xFF);
+			printf("Received a dhcp ack packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, (addr >> 16) & 0xFF, // NOLINT
+			       (addr >> 8) & 0xFF, (addr) & 0xFF); // NOLINT
 			break;
 		}
 	}
@@ -506,7 +506,7 @@ int dhcp_rebind(struct dhcp_t *dhcp_ack) {
 	struct dhcp_t dhcp_rebind;
 	uint8_t *option_value;
 	srand((unsigned int) time(NULL)); //随机数播种
-	xid = (uint32_t) rand();
+	xid = (uint32_t) rand(); // NOLINT
 
 	//rebind包 x.x.x.x -> 255.255.255.255
 	change_socket_setup(ntohl(get_ip_address()), INADDR_BROADCAST);
@@ -533,8 +533,8 @@ int dhcp_rebind(struct dhcp_t *dhcp_ack) {
 			get_dhcp_option(dhcp_ack, OPTION_DHCP_SERVER_IDENTIFIER, &option_value);
 			memcpy(&dhcp_server_identifier, option_value, sizeof(struct in_addr));
 			int addr = ntohl(dhcp_server_identifier);
-			printf("Received a dhcp ack packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, (addr >> 16) & 0xFF,
-			       (addr >> 8) & 0xFF, (addr) & 0xFF);
+			printf("Received a dhcp ack packet from %d.%d.%d.%d!\n", (addr >> 24) & 0xFF, (addr >> 16) & 0xFF, // NOLINT
+			       (addr >> 8) & 0xFF, (addr) & 0xFF); // NOLINT
 			break;
 		}
 	}
@@ -703,8 +703,6 @@ void setup_interface(struct dhcp_t *dhcp_ack) {
 		printf("Cannot set gateway!\n");
 		return;
 	}
-
-	return;
 }
 
 //释放网卡地址
@@ -720,8 +718,6 @@ void setup_interface_release() {
 		printf("Cannot set ip address!\n");
 		return;
 	}
-
-	return;
 }
 
 //设置定时
