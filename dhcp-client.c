@@ -726,7 +726,7 @@ void set_alarm(struct dhcp_t *dhcp_ack) {
 
 	//获取租约时间
 	if (get_dhcp_option(dhcp_ack, OPTION_IP_ADDRESS_LEASE_TIME, &option_value) != 4) {
-		printf("Cannnot get IP lease time!\n");
+		printf("Cannot get IP lease time!\n");
 		return;
 	} else {
 		memcpy(&lease_time, option_value, 4);
@@ -735,7 +735,7 @@ void set_alarm(struct dhcp_t *dhcp_ack) {
 
 	//获取T1
 	if (get_dhcp_option(dhcp_ack, OPTION_IP_T1_RENEWAL_TIME, &option_value) != 4) {
-		printf("Cannnot get IP renewal time!\n");
+		printf("Cannot get IP renewal time!\n");
 		t1_time = lease_time / 2;
 	} else {
 		memcpy(&t1_time, option_value, 4);
@@ -744,7 +744,7 @@ void set_alarm(struct dhcp_t *dhcp_ack) {
 
 	//获取T2
 	if (get_dhcp_option(dhcp_ack, OPTION_IP_T2_REBIND_TIME, &option_value) != 4) {
-		printf("Cannnot get IP rebind time!\n");
+		printf("Cannot get IP rebind time!\n");
 		t2_time = lease_time / 8 * 7;
 	} else {
 		memcpy(&t2_time, option_value, 4);
