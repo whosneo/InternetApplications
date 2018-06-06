@@ -1,0 +1,37 @@
+# TLD Name Server A: a.tld-servers.net 127.3.3.1
+
+# Microsoft.com
+
+microsoft.com                                   86400       IN      A       191.239.213.197
+microsoft.com                                   86400       IN      A       104.40.211.35
+microsoft.com                                   86400       IN      A       104.43.195.251
+microsoft.com                                   86400       IN      A       23.100.122.175
+microsoft.com                                   86400       IN      A       23.96.52.53
+
+microsoft.com                                   86400       IN      MX      microsoft-com.mail.protection.outlook.com
+microsoft-com.mail.protection.outlook.com       86400       IN      A       23.103.156.42
+
+# IETF.org
+
+ietf.org                                        86400       IN      A       4.31.198.44
+
+ietf.org                                        86400       IN      MX      mail.ietf.org
+mail.ietf.org                                   86400       IN      A       4.31.198.44
+
+# QQ.com
+
+qq.com                                          86400       IN      A       111.161.64.48
+qq.com                                          86400       IN      A       111.161.64.40
+
+qq.com                                          86400       IN      MX      mx1.qq.com
+qq.com                                          86400       IN      MX      mx2.qq.com
+qq.com                                          86400       IN      MX      mx3.qq.com
+mx1.qq.com                                      86400       IN      A       183.57.48.35
+mx2.qq.com                                      86400       IN      A       157.255.174.11
+mx3.qq.com                                      86400       IN      A       157.255.174.110
+
+# baidu.com
+
+www.baidu.com                                   86400       IN      CNAME   www.a.shifen.com
+www.a.shifen.com                                86400       IN      A       61.135.169.121
+www.a.shifen.com                                86400       IN      A       61.135.169.125

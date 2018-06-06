@@ -1,0 +1,13 @@
+# TLD Name Server B: b.tld-servers.net 127.3.3.2
+
+# CN
+
+cn                                              86400       IN      NS      a.second-servers.net
+
+a.second-servers.net                            86400       IN      A       127.4.4.1
+
+# US
+
+us                                              86400       IN      A       b.second-servers.net
+
+b.second-servers.net                            86400       IN      A       127.4.4.2

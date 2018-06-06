@@ -1,0 +1,18 @@
+# Root Name Server: root-servers.net 127.2.2.1
+
+# Top-Level-Domain
+
+com                                             86400       IN      NS      a.tld-servers.net
+org                                             86400       IN      NS      a.tld-servers.net
+cn                                              86400       IN      NS      b.tld-servers.net
+us                                              86400       IN      NS      b.tld-servers.net
+
+# TLD servers
+
+a.tld-servers.net                               86400       IN      A       127.3.3.1
+b.tld-servers.net                               86400       IN      A       127.3.3.2
+
+# ARPA
+
+in-addr.arpa                                    86400       IN      NS      in-addr-servers.arpa
+in-addr-servers.arpa                            86400       IN      A       127.2.2.2

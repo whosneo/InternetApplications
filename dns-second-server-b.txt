@@ -1,0 +1,6 @@
+# Second Name Server B: b.second-servers.net 127.4.4.2
+
+# vote.us
+
+vote.us                                         86400       IN      A       156.154.193.226
+vote.us                                         86400       IN      A       156.154.42.226

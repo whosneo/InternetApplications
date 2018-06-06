@@ -1,0 +1,7 @@
+# ARPA Name Server: in-addr-servers.arpa 127.2.2.2
+
+# PTR
+
+8.8.8.8.in-addr.arpa                                    86400       IN      PTR      google-public-dns-a.google.com
+8.4.2.1.in-addr.arpa                                    86400       IN      PTR      public1.sdns.cn
+114.114.114.114.in-addr.arpa                            86400       IN      PTR      public1.114dns.com
