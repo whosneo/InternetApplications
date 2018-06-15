@@ -24,6 +24,8 @@ void main(int argc, char *argv[]) {
 
 	listen(serverSock, SOMAXCONN);
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
 	while (1) {
 		clientSock = accept(serverSock, (struct sockaddr *) &clientAddr, &clientAddrSize);
 		printf("*********************************\n");
@@ -44,4 +46,5 @@ void main(int argc, char *argv[]) {
 		}
 		close(clientSock);
 	}
+#pragma clang diagnostic pop
 }
