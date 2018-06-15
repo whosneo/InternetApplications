@@ -7,6 +7,8 @@ org                                             86400       IN      NS      a.tl
 cn                                              86400       IN      NS      b.tld-servers.net
 us                                              86400       IN      NS      b.tld-servers.net
 
+中国                                            86400       IN      NS      b.tld-servers.net
+
 # TLD servers
 
 a.tld-servers.net                               86400       IN      A       127.3.3.1
